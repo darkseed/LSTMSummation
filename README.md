@@ -172,10 +172,10 @@ The residuals are:
 </p>
 <p>
     Recall that the network was trained on input sequencies ranging from 5 to 15 values long.
-    After receiving 15 input values of 0.5, the network predicts a sum of 7.503. The cumulative error is only 0.03.
+    After receiving 15 input values of 0.5, the network predicts a sum of 7.54. The cumulative error is only 0.04.
     Notably, the error is greater during the first 5 inputs.
     After 20 steps,
-    the error is 0.37, but the network has achieved some level of generalization. If you run the code yourself,
+    the error is 0.99, but the network has achieved some level of generalization. If you run the code yourself,
     you can see what happens at even greater length.
 </p>
 </div>
