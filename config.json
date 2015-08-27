@@ -13,7 +13,7 @@
     },
     "logging": {
         "display_interval": 20,
-        "snapshot_prefix": "/tmp/sumation",
+        "snapshot_prefix": "/tmp/summation",
         "snapshot_interval": 1000,
         "schematic_path": "/tmp/summation.png",
         "graph_prefix": "/tmp/history",
