@@ -14,11 +14,11 @@ def lstm_layers(net, step, filler, net_config):
     else:
         prev_hidden = "lstm_hidden%d" % (step - 1)
         prev_mem = "lstm_mem%d" % (step - 1)
-    # Concatenate the hidden output with the next input value 
+    # Concatenate the hidden output with the next input value
     layer_list.append(Concat("lstm_concat%d" % step,
         bottoms=[prev_hidden, "value%d" % step]))
     # Run the LSTM for one more step
-    layer_list.append(LstmUnit("lstm%d" % step, net_config["mem_cells"], 
+    layer_list.append(LstmUnit("lstm%d" % step, net_config["mem_cells"],
         bottoms=["lstm_concat%d" % step, prev_mem],
         param_names=["input_value", "input_gate", "forget_gate", "output_gate"],
         tops=["lstm_hidden%d" % step, "lstm_mem%d" % step],
@@ -39,7 +39,8 @@ def forward(net, net_config):
     # Begin recurrence through 5 - 15 inputs
     for step in range(length):
         # Generate random inputs
-        value = np.array([random.random() for _ in range(net_config["batch_size"])])
+        value = np.array([random.random()
+            for _ in range(net_config["batch_size"])])
         # Set data of value blob to contain a batch of random numbers
         net.f(NumpyData("value%d" % step,
             value.reshape((-1, 1))))
@@ -47,13 +48,14 @@ def forward(net, net_config):
         for l in lstm_layers(net, step, filler, net_config):
             net.f(l)
 
-    # Add a fully connected layer with a bottom blob set to be the last used LSTM cell
-    # Note that the network structure is now a function of the data
+    # Add a fully connected layer with a bottom blob set to be the last used
+    # LSTM cell. Note that the network structure is now a function of the data
     net.f(InnerProduct("ip", 1, bottoms=["lstm_hidden%d" % (length - 1)],
         weight_filler=filler))
     # Add a label for the sum of the inputs
     net.f(NumpyData("label", np.reshape(accum, (-1, 1))))
-    # Compute the Euclidean loss between the preiction and label, used for backprop
+    # Compute the Euclidean loss between the preiction and label,
+    # used for backprop
     net.f(EuclideanLoss("euclidean", bottoms=["ip", "label"]))
 
 def train(config):
@@ -64,7 +66,8 @@ def train(config):
     logging = config["logging"]
     loggers = [
         apollocaffe.loggers.TrainLogger(logging["display_interval"]),
-        apollocaffe.loggers.SnapshotLogger(logging["snapshot_interval"], logging["snapshot_prefix"]),
+        apollocaffe.loggers.SnapshotLogger(
+            logging["snapshot_interval"], logging["snapshot_prefix"]),
         ]
     train_loss = []
     for i in range(solver["max_iter"]):
