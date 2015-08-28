@@ -1,6 +1,6 @@
 <div id="LSTM" class="subgroup">
 <h4>LSTM</h4>
-<p> With the basics laid out, let's see a more complicated example that showcases some of Apollo's strengths.
+<p> With the basics laid out, let's see a more complicated example that showcases some of Apollocaffe's strengths.
 We'll construct an LSTM network that learns to sum up a variable length sequence of 5-15 inputs distributed uniformly in [0,1].
 Best practices dictate that we separate out the hyperparameters into a separate <a href="https://github.com/Russell91/LSTMSummation/blob/master/config.json">config.json</a> file that doesn't mingle with the rest of the code.
 </p>
